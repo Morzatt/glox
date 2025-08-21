@@ -10,7 +10,7 @@ import (
 )
 
 type GLox struct {
-	HadError bool 
+	HadError bool
 }
 
 // Read reads the standard input and runs the interpreter based on the prompt command line or based on a source file.

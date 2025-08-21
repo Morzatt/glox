@@ -8,12 +8,12 @@ import (
 // swap out different reporting strategies.
 type ErrorReporter interface {
 	// Report reports the error in the GLox main struct, while writes the type of error, file and line where the error occurred to a io.Writer.
-	Report(t string, f string, l string, w io.Writer)
+	Report(errorType string, file string, line string, w io.Writer)
 }
 
 // Error is the basic error type, which implements the ErrorReporter interface and writes to the standard input.
-// type Error struct {}
+type Error struct { }
 
-// func (e *Error) Report(t string, f string, l string, w io.Writer) {
-// 	return fmt.Errorf()
-// }
+func (e *Error) Report(errorType string, file string, line string, w io.Writer) {
+
+}

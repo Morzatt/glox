@@ -1,8 +1,6 @@
 package scanner
 
-import (
-	"fmt"
-)
+import "github.com/Morzatt/glox/errors"
 
 type Scanner struct {
 	// Source of the code to scan.
@@ -24,7 +22,6 @@ type Scanner struct {
 
 func (s *Scanner) ScanTokens() []Token {
 	for !s.isAtEnd() {
-		fmt.Printf("start: %d, current:%d \n", s.Start, s.Current)
 		s.Start = s.Current
 		s.scanToken()
 	}
@@ -51,10 +48,12 @@ func (s *Scanner) scanToken() {
 		case "+": s.addToken(PLUS); 
 		case ";": s.addToken(SEMICOLON); 
 		case "*": s.addToken(STAR); 
+	default: 
+		errors.Error
 	} 
 }
 
-// addToken grabs the text of the current lexeme and creates a new token for it.
+// addToken takes the text of the current lexeme and creates a new token for it.
 func (s *Scanner) addToken(t TokenType, literal ...any) {
 	text := string(s.Source[s.Start:s.Current])
 	if literal != nil {
@@ -66,8 +65,5 @@ func (s *Scanner) addToken(t TokenType, literal ...any) {
 // advance consumes the next character in the source file and returns it
 func (s *Scanner) advance() string {
 	s.Current++
-	if (s.Current-1) == 0 {
-		return string(s.Source[0])
-	}
 	return string(s.Source[s.Current-1])
 }
